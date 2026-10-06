@@ -4,6 +4,7 @@ eval "$(starship init zsh)"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.config/.oh-my-zsh"
+export PROMPT_EOL_MARK='⏎'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
