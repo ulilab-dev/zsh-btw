@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATHl
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+eval "$(starship init zsh)"
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.config/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -28,8 +29,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Uncomment the following line to change how often to auto-update (in days).
+# Uncomment the following line to change the frequency the auto-updater is run (in days).
 # zstyle ':omz:update' frequency 13
+
+# Uncomment the following line to set how old an update must be before it's applied, manually or via the auto-updater (in days).
+# zstyle ':omz:update' cooldown 10
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -70,9 +74,20 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting history)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+
+# Custom eza aliases
+alias ls='eza -l --color=always --group-directories-first --icons=always' # preferred listing
+alias lt='eza -aT --color=always --group-directories-first --icons=always' # tree listing
+alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
+
+# Auto-completion for eza 
+if type eza &>/dev/null; then
+  compdef _files ls
+  compdef _files lt
+fi
 
 # User configuration
 
@@ -102,12 +117,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias ls='eza -al --color=always --group-directories-first --icons=always' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons=always'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons=always'  # long format
-alias lt='eza -aT --color=always --group-directories-first --icons=always' # tree listing
-alias l.="eza -a | grep -e '^\.'"                                     # show only dotfiles
-
-
-eval "$(starship init zsh)"
